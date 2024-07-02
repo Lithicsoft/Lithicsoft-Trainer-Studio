@@ -1,2 +1,14 @@
-Update Lithicsoft Trainer Studio 2024 Build: 20240701
-Pre-Anpha Version
+Lithicsoft Trainer Studio 2024 Update Build 20240702.
+Improved interface: We have worked a lot to improve the look and feel
+compared to the previous version, we also have a separate logo for the
+application.
+Launcher already working: Launcher in the previous version had no
+effect, now it checks and prepares the necessary files for the studio to 
+work, including creating the necessary folders and downloading the 
+files dependent.
+Improved handling errors: We have added and supplemented the 
+missing parts in handling errors, ensuring the best experience.
+Improve performance: Eliminate and reorganize unnecessary code and
+steps/algorithms to increase application performance.
+App: We've made improvements to the way buttons and input bars
+work, making sure everything works correctly.
