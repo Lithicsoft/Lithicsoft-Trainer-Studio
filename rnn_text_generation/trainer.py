@@ -1,3 +1,11 @@
+# License: Apache-2.0
+ #
+ # rnn_text_generation/trainer.py: Trainer for RNN Text Generation model in Trainer Studio
+ #
+ # (C) Copyright 2024 Lithicsoft Organization
+ # Author: Bui Nguyen Tan Sang <tansangbuinguyen52@gmail.com>
+ #
+
 import tensorflow as tf
 import numpy as np
 import os
@@ -16,6 +24,7 @@ SEQ_LENGTH = int(os.getenv('SEQ_LENGTH'))
 CHECKPOINT_DIR = os.getenv('CHECKPOINT_DIR')
 INPUT_DIR = os.getenv('INPUT_DIR')
 START_STRING = os.getenv('START_STRING')
+LOG_DIR = os.getenv('LOG_DIR')
 
 def read_text_files(directory):
     text = ''
@@ -69,7 +78,9 @@ model.compile(optimizer='adam', loss=loss)
 checkpoint_prefix = os.path.join(CHECKPOINT_DIR, "ckpt_{epoch}")
 checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_prefix, save_weights_only=True)
 
-history = model.fit(dataset, epochs=EPOCHS, callbacks=[checkpoint_callback])
+tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=LOG_DIR, histogram_freq=1)
+
+history = model.fit(dataset, epochs=EPOCHS, callbacks=[checkpoint_callback, tensorboard_callback])
 
 tf.saved_model.save(model, 'one_step')
 
