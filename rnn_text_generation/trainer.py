@@ -29,6 +29,8 @@ CHECKPOINT_DIR = f"{dir_path}\\{os.getenv('CHECKPOINT_DIR')}"
 INPUT_DIR = f"{dir_path}\\{os.getenv('INPUT_DIR')}"
 START_STRING = os.getenv('START_STRING')
 LOG_DIR = f"{dir_path}\\{os.getenv('LOG_DIR')}"
+RANGE_TEST = int(os.getenv('RANGE_TEST'))
+SAVE_WEIGHTS_ONLY = bool(os.getenv('SAVE_WEIGHTS_ONLY'))
 
 def read_text_files(directory):
     text = ''
@@ -81,7 +83,7 @@ loss = tf.losses.SparseCategoricalCrossentropy(from_logits=True)
 model.compile(optimizer='adam', loss=loss)
 
 checkpoint_prefix = os.path.join(CHECKPOINT_DIR, "ckpt_{epoch}.weights.h5")
-checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_prefix, save_weights_only=True)
+checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_prefix, save_weights_only=SAVE_WEIGHTS_ONLY)
 
 tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=LOG_DIR, histogram_freq=1)
 
@@ -119,10 +121,9 @@ states = None
 next_char = tf.constant([START_STRING])
 result = [next_char]
 
-for n in range(1000):
+for n in range(RANGE_TEST):
     next_char, states = one_step_model.generate_one_step(next_char, states=states)
     result.append(next_char)
 
 result = tf.strings.join(result)
 print(result[0].numpy().decode('utf-8', errors='ignore'))
-
