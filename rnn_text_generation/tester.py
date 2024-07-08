@@ -55,6 +55,7 @@ class OneStep(tf.keras.Model):
         predicted_chars = self.chars_from_ids(predicted_ids)
         return predicted_chars, states
 
+model = tf.keras.models.load_model('one_step')
 one_step_model = OneStep(model, chars_from_ids, ids_from_chars)
 
 states = None
