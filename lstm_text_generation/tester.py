@@ -10,6 +10,11 @@ load_dotenv()
 RANGE_TEST = int(os.getenv('RANGE_TEST'))
 SEQ_LENGHT = int(os.getenv('SEQ_LENGTH'))
 
+best_model, char_to_int = torch.load("model.pth")
+n_vocab = len(char_to_int)
+int_to_char = dict((i, c) for c, i in char_to_int.items())
+model.load_state_dict(best_model)
+
 filename = "prompt.txt"
 seq_length = SEQ_LENGTH
 raw_text = open(filename, 'r', encoding='utf-8').read()
