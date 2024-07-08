@@ -9,10 +9,14 @@
 import tensorflow as tf
 import numpy as np
 import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 import time
 from dotenv import load_dotenv
 
 load_dotenv()
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
 
 VOCAB_SIZE = int(os.getenv('VOCAB_SIZE'))
 EMBEDDING_DIM = int(os.getenv('EMBEDDING_DIM'))
@@ -21,10 +25,10 @@ BATCH_SIZE = int(os.getenv('BATCH_SIZE'))
 BUFFER_SIZE = int(os.getenv('BUFFER_SIZE'))
 EPOCHS = int(os.getenv('EPOCHS'))
 SEQ_LENGTH = int(os.getenv('SEQ_LENGTH'))
-CHECKPOINT_DIR = os.getenv('CHECKPOINT_DIR')
-INPUT_DIR = os.getenv('INPUT_DIR')
+CHECKPOINT_DIR = f"{dir_path}\\{os.getenv('CHECKPOINT_DIR')}"
+INPUT_DIR = f"{dir_path}\\{os.getenv('INPUT_DIR')}"
 START_STRING = os.getenv('START_STRING')
-LOG_DIR = os.getenv('LOG_DIR')
+LOG_DIR = f"{dir_path}\\{os.getenv('LOG_DIR')}"
 
 def read_text_files(directory):
     text = ''
@@ -57,7 +61,7 @@ dataset = (dataset.shuffle(BUFFER_SIZE).batch(BATCH_SIZE, drop_remainder=True).p
 
 class MyModel(tf.keras.Model):
     def __init__(self, vocab_size, embedding_dim, rnn_units):
-        super().__init__(self)
+        super(MyModel, self).__init__()
         self.embedding = tf.keras.layers.Embedding(vocab_size, embedding_dim)
         self.gru = tf.keras.layers.GRU(rnn_units, return_sequences=True, return_state=True)
         self.dense = tf.keras.layers.Dense(vocab_size)
@@ -65,7 +69,8 @@ class MyModel(tf.keras.Model):
     def call(self, inputs, states=None, return_state=False, training=False):
         x = self.embedding(inputs, training=training)
         if states is None:
-            states = self.gru.get_initial_state(x)
+            batch_size = tf.shape(inputs)[0]
+            states = [tf.zeros((batch_size, self.gru.units))]
         x, states = self.gru(x, initial_state=states, training=training)
         x = self.dense(x, training=training)
         return (x, states) if return_state else x
@@ -75,12 +80,12 @@ model = MyModel(vocab_size=VOCAB_SIZE, embedding_dim=EMBEDDING_DIM, rnn_units=RN
 loss = tf.losses.SparseCategoricalCrossentropy(from_logits=True)
 model.compile(optimizer='adam', loss=loss)
 
-checkpoint_prefix = os.path.join(CHECKPOINT_DIR, "ckpt_{epoch}")
+checkpoint_prefix = os.path.join(CHECKPOINT_DIR, "ckpt_{epoch}.weights.h5")
 checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_prefix, save_weights_only=True)
 
 tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=LOG_DIR, histogram_freq=1)
 
-history = model.fit(dataset, epochs=EPOCHS, callbacks=[checkpoint_callback, tensorboard_callback])
+history = model.fit(dataset, epochs=EPOCHS, callbacks=[checkpoint_callback, tensorboard_callback], verbose=2)
 
 tf.saved_model.save(model, 'one_step')
 
@@ -119,4 +124,5 @@ for n in range(1000):
     result.append(next_char)
 
 result = tf.strings.join(result)
-print(result[0].numpy().decode('utf-8'))
+print(result[0].numpy().decode('utf-8', errors='ignore'))
+
