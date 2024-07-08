@@ -25,6 +25,7 @@ BATCH_SIZE = int(os.getenv('BATCH_SIZE'))
 BUFFER_SIZE = int(os.getenv('BUFFER_SIZE'))
 EPOCHS = int(os.getenv('EPOCHS'))
 SEQ_LENGTH = int(os.getenv('SEQ_LENGTH'))
+TEMPERATURE = int(os.getenv('TEMPERATURE'))
 CHECKPOINT_DIR = f"{dir_path}\\{os.getenv('CHECKPOINT_DIR')}"
 INPUT_DIR = f"{dir_path}\\{os.getenv('INPUT_DIR')}"
 START_STRING = os.getenv('START_STRING')
@@ -92,7 +93,7 @@ history = model.fit(dataset, epochs=EPOCHS, callbacks=[checkpoint_callback, tens
 tf.saved_model.save(model, 'one_step')
 
 class OneStep(tf.keras.Model):
-    def __init__(self, model, chars_from_ids, ids_from_chars, temperature=1.0):
+    def __init__(self, model, chars_from_ids, ids_from_chars, temperature=TEMPERATURE):
         super().__init__()
         self.temperature = temperature
         self.model = model
