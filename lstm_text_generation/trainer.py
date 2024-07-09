@@ -84,7 +84,7 @@ model.to(device)
 
 optimizer = optim.Adam(model.parameters())
 loss_fn = nn.CrossEntropyLoss(reduction="sum")
-loader = data.DataLoader(data.TensorDataset(X, y), shuffle=True, batch_size=batch_size)
+loader = data.DataLoader(data.TensorDataset(X, y), shuffle=True, batch_size=BATCH_SIZE)
 
 best_model = None
 best_loss = np.inf
