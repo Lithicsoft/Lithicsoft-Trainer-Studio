@@ -90,7 +90,7 @@ tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=LOG_DIR, histogram
 
 history = model.fit(dataset, epochs=EPOCHS, callbacks=[checkpoint_callback, tensorboard_callback], verbose=2)
 
-tf.saved_model.save(model, 'one_step')
+tf.saved_model.save(model, 'outputs/one_step')
 
 class OneStep(tf.keras.Model):
     def __init__(self, model, chars_from_ids, ids_from_chars, temperature=TEMPERATURE):
