@@ -1,1 +1,1 @@
-torch numpy
+python-dotenv torch numpy
