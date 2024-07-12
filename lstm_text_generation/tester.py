@@ -17,9 +17,8 @@ model.load_state_dict(best_model)
 
 seq_length = SEQ_LENGTH
 raw_text = input("Prompt: ")
-raw_text = raw_text.lower()
+prompt = raw_text.lower()
 start = np.random.randint(0, len(raw_text)-seq_length)
-prompt = raw_text[start:start+seq_length]
 pattern = [char_to_int[c] for c in prompt]
  
 model.eval()
