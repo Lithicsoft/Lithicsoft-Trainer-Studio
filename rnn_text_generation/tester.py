@@ -12,8 +12,7 @@ INPUT_DIR = f"{dir_path}\\{os.getenv('INPUT_DIR')}"
 TEMPERATURE = float(os.getenv('TEMPERATURE'))
 RANGE_TEST = int(os.getenv('RANGE_TEST'))
 
-filename = "prompt.txt"
-START_STRING = open(filename, 'r', encoding='utf-8').read()
+START_STRING = input("Prompt: ")
 
 def read_text_files(directory):
     text = ''
@@ -55,7 +54,7 @@ class OneStep(tf.keras.Model):
         predicted_chars = self.chars_from_ids(predicted_ids)
         return predicted_chars, states
 
-model = tf.keras.models.load_model('one_step')
+model = tf.keras.models.load_model('outputs/one_step')
 one_step_model = OneStep(model, chars_from_ids, ids_from_chars)
 
 states = None
