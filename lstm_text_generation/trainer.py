@@ -107,9 +107,9 @@ for epoch in range(n_epochs):
             best_model = model.state_dict()
         print("Epoch %d: Cross-entropy: %.4f" % (epoch, loss))
 
-torch.save([best_model, char_to_int], "model.pth")
+torch.save([best_model, char_to_int], "outputs/model.pth")
 
-best_model, char_to_int = torch.load("model.pth")
+best_model, char_to_int = torch.load("outputs/model.pth")
 n_vocab = len(char_to_int)
 int_to_char = dict((i, c) for c, i in char_to_int.items())
 model.load_state_dict(best_model)
