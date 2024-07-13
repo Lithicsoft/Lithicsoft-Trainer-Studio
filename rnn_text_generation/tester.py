@@ -1,3 +1,11 @@
+# License: Apache-2.0
+ #
+ # rnn_text_generation/tester.py: Tester for RNN Text Generation model in Trainer Studio
+ #
+ # (C) Copyright 2024 Lithicsoft Organization
+ # Author: Bui Nguyen Tan Sang <tansangbuinguyen52@gmail.com>
+ #
+
 import tensorflow as tf
 import numpy as np
 import os
