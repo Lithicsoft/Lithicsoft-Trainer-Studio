@@ -1,3 +1,11 @@
+# License: Apache-2.0
+ #
+ # lstm_text_generation/tester.py: Tester for LSTM Text Generation model in Trainer Studio
+ #
+ # (C) Copyright 2024 Lithicsoft Organization
+ # Author: Bui Nguyen Tan Sang <tansangbuinguyen52@gmail.com>
+ #
+
 import numpy as np
 import torch
 import torch.nn as nn
