@@ -1,22 +1,5 @@
-Lithicsoft Trainer Studio 2024 Build 20240709
-Python support: Add language system (C#, Python), 
-add 2 new models that support python: LSTM (PyTorch) 
-and RNN (Tensorflow) text generation
-Detail:
-Patch 20240708
-Shows the installation process on pip
-Fix missing dotenv package
-Fix incorrect display of richTextBox (1->2)
-Fix project being opened without installing 
-necessary packages
-Patch 20240708a1
-Support LSTM Text Generation Model (PyTorch)
-Fix result tab:
-+ Remove test model (pipeline is not available 
-for this project type)
-+ Change model file to result folder
-Patch 20240708a2
-Add error handle for pip
-Support test for text generation models
-Cleaning code no.1
-Better trainer kit downloader
+Lithicsoft Trainer Studio 2024 Build 20240714r (Remake)
+Remake of the Trainer Studio (Winform to WPF).
+Convert text classification to value prediction.
+More intuitive interface.
+There are necessary processing for the interface.
