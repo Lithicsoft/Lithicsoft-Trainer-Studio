@@ -1,1 +1,3 @@
-python-dotenv tensorflow numpy
+python-dotenv 
+tensorflow 
+numpy
