@@ -1,1 +1,1 @@
-pytorch torchvision torchaudio cpuonly -c pytorch
+pytorch torchvision torchaudio cpuonly -c pytorch numpy
