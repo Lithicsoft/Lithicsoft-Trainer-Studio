@@ -19,6 +19,9 @@ load_dotenv()
 RANGE_TEST = int(os.getenv('RANGE_TEST'))
 SEQ_LENGHT = int(os.getenv('SEQ_LENGTH'))
 
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+model.to(device)
+
 best_model, char_to_int = torch.load("outputs/model.pth")
 n_vocab = len(char_to_int)
 int_to_char = dict((i, c) for c, i in char_to_int.items())
