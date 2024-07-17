@@ -29,6 +29,41 @@ NUM_LAYER = int(os.getenv('NUM_LAYERS'))
 BATCH_FIRST = bool(os.getenv('BATCH_FIRST'))
 RANGE_TEST = int(os.getenv('RANGE_TEST'))
 
+def read_text_files(directory):
+    text = ''
+    for root, _, files in os.walk(directory):
+        for file in files:
+            if file.endswith('.txt'):
+                with open(os.path.join(root, file), 'rb') as f:
+                    text += f.read().decode(encoding='utf-8')
+    return text
+
+raw_text = read_text_files(INPUT_DIR)
+raw_text = raw_text.lower()
+
+chars = sorted(list(set(raw_text)))
+char_to_int = dict((c, i) for i, c in enumerate(chars))
+
+n_chars = len(raw_text)
+n_vocab = len(chars)
+print("Total Characters: ", n_chars)
+print("Total Vocab: ", n_vocab)
+
+seq_length = SEQ_LENGHT
+dataX = []
+dataY = []
+for i in range(0, n_chars - seq_length, 1):
+    seq_in = raw_text[i:i + seq_length]
+    seq_out = raw_text[i + seq_length]
+    dataX.append([char_to_int[char] for char in seq_in])
+    dataY.append(char_to_int[seq_out])
+n_patterns = len(dataX)
+print("Total Patterns: ", n_patterns)
+
+X = torch.tensor(dataX, dtype=torch.float32).reshape(n_patterns, seq_length, 1)
+X = X / float(n_vocab)
+y = torch.tensor(dataY)
+
 class CharModel(nn.Module):
     def __init__(self):
         super().__init__()
