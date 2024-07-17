@@ -89,7 +89,6 @@ model.to(device)
 seq_length = SEQ_LENGHT
 raw_text = input("Prompt: ")
 prompt = raw_text.lower()
-start = np.random.randint(0, len(raw_text)-seq_length)
 pattern = [char_to_int[c] for c in prompt]
  
 model.eval()
