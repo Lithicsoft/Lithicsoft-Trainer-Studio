@@ -16,8 +16,30 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-RANGE_TEST = int(os.getenv('RANGE_TEST'))
+INPUT_DIR = f"{dir_path}\\{os.getenv('INPUT_DIR')}"
 SEQ_LENGHT = int(os.getenv('SEQ_LENGTH'))
+EPOCHS = int(os.getenv('EPOCHS'))
+BATCH_SIZE = int(os.getenv('BATCH_SIZE'))
+DROPOUT = float(os.getenv('DROPOUT'))
+INPUT_SIZE = int(os.getenv('INPUT_SIZE'))
+HIDDEN_SIZE = int(os.getenv('HIDDEN_SIZE'))
+NUM_LAYER = int(os.getenv('NUM_LAYERS'))
+BATCH_FIRST = bool(os.getenv('BATCH_FIRST'))
+RANGE_TEST = int(os.getenv('RANGE_TEST'))
+
+class CharModel(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.lstm = nn.LSTM(input_size=INPUT_SIZE, hidden_size=HIDDEN_SIZE, num_layers=NUM_LAYER, batch_first=BATCH_FIRST, dropout=DROPOUT)
+        self.dropout = nn.Dropout(DROPOUT)
+        self.linear = nn.Linear(HIDDEN_SIZE, n_vocab)
+    def forward(self, x):
+        x, _ = self.lstm(x)
+        x = x[:, -1, :]
+        x = self.linear(self.dropout(x))
+        return x
+
+model = CharModel()
 
 best_model, char_to_int = torch.load(f"{dir_path}/outputs/model.pth")
 n_vocab = len(char_to_int)
