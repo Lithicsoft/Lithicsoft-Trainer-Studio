@@ -16,6 +16,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
+
 INPUT_DIR = f"{dir_path}\\{os.getenv('INPUT_DIR')}"
 SEQ_LENGHT = int(os.getenv('SEQ_LENGTH'))
 EPOCHS = int(os.getenv('EPOCHS'))
