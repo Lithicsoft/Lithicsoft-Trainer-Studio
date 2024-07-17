@@ -86,7 +86,7 @@ model.load_state_dict(best_model)
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 model.to(device)
 
-seq_length = SEQ_LENGTH
+seq_length = SEQ_LENGHT
 raw_text = input("Prompt: ")
 prompt = raw_text.lower()
 start = np.random.randint(0, len(raw_text)-seq_length)
