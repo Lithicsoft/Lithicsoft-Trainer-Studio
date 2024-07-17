@@ -1,1 +1,1 @@
-pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia numpy
+pytorch numpy torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
