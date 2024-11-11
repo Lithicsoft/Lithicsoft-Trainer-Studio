@@ -1,5 +1,4 @@
-Lithicsoft Trainer Studio 2024 Build 20240714r (Remake)
-Remake of the Trainer Studio (Winform to WPF).
-Convert text classification to value prediction.
-More intuitive interface.
-There are necessary processing for the interface.
+**Full Changelog**: 
+https://github.com/Lithicsoft/Lithicsoft-Trainer-Studio/compare/20240709...20241111
+https://github.com/Lithicsoft/TS-Source/compare/main%40%7B1day%7D...main
+https://github.com/Lithicsoft/TS-Installer/compare/main%40%7B1day%7D...main
