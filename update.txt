@@ -1,2 +1,2 @@
-20240714r
-https://github.com/Lithicsoft/Lithicsoft-Trainer-Studio/releases/download/20240714r/TS_20240714r.zip
+20241111
+https://github.com/Lithicsoft/Lithicsoft-Trainer-Studio/releases/download/20241111/20241111.zip
