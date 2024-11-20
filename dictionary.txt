@@ -1,0 +1,2 @@
+Text Generation (RNN) : rnn_text_generation
+Text Generation (LSTM) : lstm_text_generation
