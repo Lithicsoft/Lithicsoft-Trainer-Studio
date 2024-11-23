@@ -1,1 +1,3 @@
-Full Changelog: https://github.com/Lithicsoft/TS-Source/compare/main@%7B7day%7D...main
+**Full Changelog**: 
+https://github.com/Lithicsoft/Lithicsoft-Trainer-Studio/compare/main%40%7B1day%7D...main
+https://github.com/Lithicsoft/TS-Source/compare/main%40%7B1day%7D...main
