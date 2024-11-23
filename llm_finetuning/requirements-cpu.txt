@@ -1,0 +1,2 @@
+pytorch torchvision torchaudio cpuonly -c pytorch
+transformers datasets
