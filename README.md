@@ -26,10 +26,10 @@ Lithicsoft Trainer Studio is a tool that allows you to create artificial intelli
 ![Startup Window](https://github.com/Lithicsoft/Lithicsoft-Trainer-Studio/blob/main/assets/Lithicsoft%20Trainer%20Studio.png?raw=true)
 
 ### Project Management
-![Project Management](https://raw.githubusercontent.com/Lithicsoft/Lithicsoft-Trainer-Studio/main/assets/projectmanager.png)
+![Project Management](https://raw.githubusercontent.com/Lithicsoft/Lithicsoft-Trainer-Studio/main/assets/projectsmanager.png)
 
 ### Usage
-![Usage](https://raw.githubusercontent.com/Lithicsoft/Lithicsoft-Trainer-Studio/main/assets/usage.png)
+![Usage](https://raw.githubusercontent.com/Lithicsoft/Lithicsoft-Trainer-Studio/main/assets/pythonusage.png)
 
 ## Installation
 
