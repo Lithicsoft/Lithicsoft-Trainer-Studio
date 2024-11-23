@@ -1,2 +1,2 @@
 20241123
-https://github.com/Lithicsoft/Lithicsoft-Trainer-Studio/releases/download/20241117/TS_20241123_win-x64.zip
+https://github.com/Lithicsoft/Lithicsoft-Trainer-Studio/releases/download/20241123/TS_20241123_win-x64.zip
