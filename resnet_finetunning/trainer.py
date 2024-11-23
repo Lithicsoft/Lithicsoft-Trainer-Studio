@@ -12,7 +12,7 @@ BATCH_SIZE = int(os.getenv("BATCH_SIZE", 32))
 LEARNING_RATE = float(os.getenv("LEARNING_RATE", 0.001))
 MAX_EPOCHS = int(os.getenv("MAX_EPOCHS", 5))
 USE_GPU = os.getenv("USE_GPU", "false").lower() == "true"
-DATA_DIR = os.getenv("DATA_DIR", "./data")
+DATA_DIR = os.getenv("DATA_DIR", "./datasets")
 
 class CNNFineTuner(pl.LightningModule):
     def __init__(self):
