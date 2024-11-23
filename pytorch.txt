@@ -1,2 +1,3 @@
 Text Generation (LSTM)
 LLM Finetuning (LLM)
+ResNet Finetuning (CNN and ETC)
