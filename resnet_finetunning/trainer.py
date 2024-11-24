@@ -15,7 +15,9 @@ from torchvision import transforms, datasets, models
 import torch.nn as nn
 import torch.optim as optim
 import torch
+import logging 
 
+logging.basicConfig(level=logging.INFO)
 load_dotenv()
 
 BATCH_SIZE = int(os.getenv("BATCH_SIZE", 32))
