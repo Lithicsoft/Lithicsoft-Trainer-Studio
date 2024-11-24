@@ -11,7 +11,9 @@ from peft import get_peft_model, LoraConfig, TaskType
 from datasets import load_dataset
 from dotenv import load_dotenv
 import os
+import logging
 
+logging.basicConfig(level=logging.INFO)
 load_dotenv()
 
 model_name = os.getenv("MODEL_NAME", "gpt2")
@@ -66,3 +68,4 @@ trainer = Trainer(
 trainer.train()
 
 model.save_pretrained(output_dir)
+tokenizer.save_pretrained(output_dir)
