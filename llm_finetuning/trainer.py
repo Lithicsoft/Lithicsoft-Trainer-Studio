@@ -7,6 +7,7 @@
  #
 
 from transformers import AutoModelForCausalLM, AutoTokenizer, Trainer, TrainingArguments
+from peft import get_peft_model, LoraConfig, TaskType
 from datasets import load_dataset
 from dotenv import load_dotenv
 import os
@@ -22,8 +23,23 @@ batch_size = int(os.getenv("BATCH_SIZE", 8))
 epochs = int(os.getenv("EPOCHS", 3))
 save_steps = int(os.getenv("SAVE_STEPS", 10000))
 
+lora_r = int(os.getenv("LORA_R", 8))
+lora_alpha = int(os.getenv("LORA_ALPHA", 32))
+lora_dropout = float(os.getenv("LORA_DROPOUT", 0.1))
+lora_bias = os.getenv("LORA_BIAS", "none")
+
 tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(model_name)
+base_model = AutoModelForCausalLM.from_pretrained(model_name)
+
+lora_config = LoraConfig(
+    task_type=TaskType.CAUSAL_LM,
+    r=lora_r,
+    lora_alpha=lora_alpha,
+    lora_dropout=lora_dropout,
+    bias=lora_bias,
+)
+
+model = get_peft_model(base_model, lora_config)
 
 dataset = load_dataset(dataset_name, dataset_config)
 
@@ -48,3 +64,5 @@ trainer = Trainer(
 )
 
 trainer.train()
+
+model.save_pretrained(output_dir)
