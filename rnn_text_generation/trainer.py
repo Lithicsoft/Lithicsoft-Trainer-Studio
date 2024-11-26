@@ -16,7 +16,6 @@ load_dotenv()
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
-VOCAB_SIZE = int(os.getenv('VOCAB_SIZE'))
 EMBEDDING_DIM = int(os.getenv('EMBEDDING_DIM'))
 RNN_UNITS = int(os.getenv('RNN_UNITS'))
 BATCH_SIZE = int(os.getenv('BATCH_SIZE'))
@@ -76,7 +75,7 @@ class MyModel(tf.keras.Model):
         x = self.dense(x, training=training)
         return (x, states) if return_state else x
 
-model = MyModel(vocab_size=VOCAB_SIZE, embedding_dim=EMBEDDING_DIM, rnn_units=RNN_UNITS)
+model = MyModel(vocab_size=len(ids_from_chars.get_vocabulary()), embedding_dim=EMBEDDING_DIM, rnn_units=RNN_UNITS)
 
 loss = tf.losses.SparseCategoricalCrossentropy(from_logits=True)
 model.compile(optimizer='adam', loss=loss)
