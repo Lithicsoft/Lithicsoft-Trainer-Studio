@@ -14,11 +14,13 @@ import torch.optim as optim
 import torch.utils.data as data
 from dotenv import load_dotenv
 
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
+
 load_dotenv()
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
-
-INPUT_DIR = f"{dir_path}\\{os.getenv('INPUT_DIR')}"
+INPUT_DIR = os.getenv('INPUT_DIR')
 SEQ_LENGHT = int(os.getenv('SEQ_LENGTH'))
 EPOCHS = int(os.getenv('EPOCHS'))
 BATCH_SIZE = int(os.getenv('BATCH_SIZE'))
@@ -78,7 +80,7 @@ class CharModel(nn.Module):
 
 model = CharModel()
 
-best_model, char_to_int = torch.load(f"{dir_path}/outputs/model.pth")
+best_model, char_to_int = torch.load(".\\outputs\\model.pth")
 n_vocab = len(char_to_int)
 int_to_char = dict((i, c) for c, i in char_to_int.items())
 model.load_state_dict(best_model)
