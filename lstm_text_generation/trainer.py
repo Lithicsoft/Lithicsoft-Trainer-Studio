@@ -14,9 +14,11 @@ import torch.optim as optim
 import torch.utils.data as data
 from dotenv import load_dotenv
 
-load_dotenv()
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
+load_dotenv()
 
 INPUT_DIR = f"{dir_path}\\{os.getenv('INPUT_DIR')}"
 SEQ_LENGHT = int(os.getenv('SEQ_LENGTH'))
@@ -107,7 +109,7 @@ for epoch in range(n_epochs):
             best_model = model.state_dict()
         print("Epoch %d: Cross-entropy: %.4f" % (epoch, loss))
 
-torch.save([best_model, char_to_int], f"{dir_path}/outputs/model.pth")
+torch.save([best_model, char_to_int], ".\\outputs\\model.pth")
 
 best_model, char_to_int = torch.load(f"{dir_path}/outputs/model.pth")
 n_vocab = len(char_to_int)
