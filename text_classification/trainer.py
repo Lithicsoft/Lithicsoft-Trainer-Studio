@@ -21,6 +21,8 @@ from nltk.stem import WordNetLemmatizer
 import nltk
 from dotenv import load_dotenv
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
+
 # Load environment variables
 load_dotenv()
 
@@ -29,9 +31,9 @@ nltk.download("stopwords")
 nltk.download("wordnet")
 
 # Load hyperparameters from .env
-TRAIN_X_PATH = os.getenv("TRAIN_X_PATH", "./datasets/train_X.pkl")
-TRAIN_Y_PATH = os.getenv("TRAIN_Y_PATH", "./datasets/train_y.pkl")
-OUTPUT_DIR = os.getenv("OUTPUT_DIR", "./outputs")
+TRAIN_X_PATH = os.getenv("TRAIN_X_PATH", f"{dir_path}\\datasets\\train_X.pkl")
+TRAIN_Y_PATH = os.getenv("TRAIN_Y_PATH", f"{dir_path}\\datasets\\train_y.pkl")
+OUTPUT_DIR = os.getenv("OUTPUT_DIR", f"{dir_path}\\outputs")
 MAX_FEATURES = int(os.getenv("MAX_FEATURES", 7000))
 NGRAM_RANGE = tuple(map(int, os.getenv("NGRAM_RANGE", "1,3").split(',')))
 SOLVER = os.getenv("SOLVER", "saga")
@@ -106,12 +108,12 @@ print("\n🔍 Detailed Classification Report:\n", classification_report(train_la
 # -----------------------------
 # 6. Save Model & Vectorizer
 # -----------------------------
-joblib.dump(clf, OUTPUT_DIR + "/" + "logistic_regression_model.pkl")
-joblib.dump(vectorizer, OUTPUT_DIR + "/" + "tfidf_vectorizer.pkl")
+joblib.dump(clf, f"{OUTPUT_DIR}\\logistic_regression_model.pkl")
+joblib.dump(vectorizer, f"{OUTPUT_DIR}\\tfidf_vectorizer.pkl")
 
 # Check file sizes
-clf_size = os.path.getsize(OUTPUT_DIR + "/" + "logistic_regression_model.pkl") / (1024 * 1024)
-vect_size = os.path.getsize(OUTPUT_DIR + "/" + "tfidf_vectorizer.pkl") / (1024 * 1024)
+clf_size = os.path.getsize(f"{OUTPUT_DIR}\\logistic_regression_model.pkl") / (1024 * 1024)
+vect_size = os.path.getsize(f"{OUTPUT_DIR}\\tfidf_vectorizer.pkl") / (1024 * 1024)
 print(f"\n📦 Model File Sizes:")
 print(f"   - Logistic Regression model: {clf_size:.2f} MB")
 print(f"   - TF-IDF Vectorizer: {vect_size:.2f} MB")
