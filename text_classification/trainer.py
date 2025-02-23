@@ -21,7 +21,9 @@ from nltk.stem import WordNetLemmatizer
 import nltk
 from dotenv import load_dotenv
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
 
 # Load environment variables
 load_dotenv()
@@ -31,9 +33,9 @@ nltk.download("stopwords")
 nltk.download("wordnet")
 
 # Load hyperparameters from .env
-TRAIN_X_PATH = os.getenv("TRAIN_X_PATH", f"{dir_path}\\datasets\\train_X.pkl")
-TRAIN_Y_PATH = os.getenv("TRAIN_Y_PATH", f"{dir_path}\\datasets\\train_y.pkl")
-OUTPUT_DIR = os.getenv("OUTPUT_DIR", f"{dir_path}\\outputs")
+TRAIN_X_PATH = os.getenv("TRAIN_X_PATH", ".\\datasets\\train_X.pkl")
+TRAIN_Y_PATH = os.getenv("TRAIN_Y_PATH", ".\\datasets\\train_y.pkl")
+OUTPUT_DIR = os.getenv("OUTPUT_DIR", ".\\outputs")
 MAX_FEATURES = int(os.getenv("MAX_FEATURES", 7000))
 NGRAM_RANGE = tuple(map(int, os.getenv("NGRAM_RANGE", "1,3").split(',')))
 SOLVER = os.getenv("SOLVER", "saga")
@@ -65,7 +67,6 @@ def preprocess_text(text):
     return text
 
 train_texts_clean = [preprocess_text(text) for text in train_texts]
-test_texts_clean = [preprocess_text(text) for text in test_texts]
 
 # -----------------------------
 # 3. Feature Extraction (Improved TF-IDF)
@@ -78,7 +79,6 @@ vectorizer = TfidfVectorizer(
 )
 
 X_train = vectorizer.fit_transform(train_texts_clean)
-X_test = vectorizer.transform(test_texts_clean)
 
 # -----------------------------
 # 4. Train Optimized Logistic Regression Model
