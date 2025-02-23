@@ -23,8 +23,8 @@ OUTPUT_DIR = os.getenv("OUTPUT_DIR", f"{dir_path}\\outputs")
 # -----------------------------
 # Load Saved Model & Vectorizer
 # -----------------------------
-clf = joblib.load(OUTPUT_DIR + "/" + "logistic_regression_model.pkl")
-vectorizer = joblib.load(OUTPUT_DIR + "/" + "tfidf_vectorizer.pkl")
+clf = joblib.load(f"{OUTPUT_DIR}\\logistic_regression_model.pkl")
+vectorizer = joblib.load(f"{OUTPUT_DIR}\\tfidf_vectorizer.pkl")
 
 # -----------------------------
 # Preprocess Function (Same as Before)
