@@ -12,11 +12,13 @@ import os
 import time
 from dotenv import load_dotenv
 
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
+
 load_dotenv()
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
-
-INPUT_DIR = f"{dir_path}\\{os.getenv('INPUT_DIR')}"
+INPUT_DIR = os.getenv('INPUT_DIR')
 TEMPERATURE = float(os.getenv('TEMPERATURE'))
 RANGE_TEST = int(os.getenv('RANGE_TEST'))
 
@@ -62,7 +64,7 @@ class OneStep(tf.keras.Model):
         predicted_chars = self.chars_from_ids(predicted_ids)
         return predicted_chars, states
 
-model = tf.keras.models.load_model(f'{dir_path}/outputs/one_step')
+model = tf.keras.models.load_model('.\\outputs\\one_step')
 one_step_model = OneStep(model, chars_from_ids, ids_from_chars)
 
 states = None
