@@ -1,3 +1,4 @@
 Text Generation (LSTM)
 LLM Finetuning (LLM)
 ResNet Finetuning (CNN and ETC)
+Text Classification (Logistic Regression)
