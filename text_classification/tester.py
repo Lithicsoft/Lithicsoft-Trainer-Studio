@@ -6,16 +6,19 @@
  # Author: Bui Nguyen Tan Sang <tansangbuinguyen52@gmail.com>
  #
 
+import os
 import joblib
 import re
 import string
 from dotenv import load_dotenv
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
+
 # Load environment variables
 load_dotenv()
 
 # Load hyperparameters from .env
-OUTPUT_DIR = os.getenv("OUTPUT_DIR", "./outputs")
+OUTPUT_DIR = os.getenv("OUTPUT_DIR", f"{dir_path}\\outputs")
 
 # -----------------------------
 # Load Saved Model & Vectorizer
