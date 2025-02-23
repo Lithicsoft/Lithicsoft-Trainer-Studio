@@ -12,9 +12,11 @@ import os
 import time
 from dotenv import load_dotenv
 
-load_dotenv()
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
+load_dotenv()
 
 EMBEDDING_DIM = int(os.getenv('EMBEDDING_DIM'))
 RNN_UNITS = int(os.getenv('RNN_UNITS'))
@@ -23,10 +25,10 @@ BUFFER_SIZE = int(os.getenv('BUFFER_SIZE'))
 EPOCHS = int(os.getenv('EPOCHS'))
 SEQ_LENGTH = int(os.getenv('SEQ_LENGTH'))
 TEMPERATURE = float(os.getenv('TEMPERATURE'))
-CHECKPOINT_DIR = f"{dir_path}\\{os.getenv('CHECKPOINT_DIR')}"
-INPUT_DIR = f"{dir_path}\\{os.getenv('INPUT_DIR')}"
+CHECKPOINT_DIR = os.getenv('CHECKPOINT_DIR')
+INPUT_DIR = os.getenv('INPUT_DIR')
 START_STRING = os.getenv('START_STRING')
-LOG_DIR = f"{dir_path}\\{os.getenv('LOG_DIR')}"
+LOG_DIR = os.getenv('LOG_DIR')
 RANGE_TEST = int(os.getenv('RANGE_TEST'))
 SAVE_WEIGHTS_ONLY = bool(os.getenv('SAVE_WEIGHTS_ONLY'))
 
@@ -87,7 +89,7 @@ tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=LOG_DIR, histogram
 
 history = model.fit(dataset, epochs=EPOCHS, callbacks=[checkpoint_callback, tensorboard_callback], verbose=2)
 
-tf.saved_model.save(model, f'{dir_path}/outputs/one_step')
+tf.saved_model.save(model, '.\\outputs\\one_step')
 
 class OneStep(tf.keras.Model):
     def __init__(self, model, chars_from_ids, ids_from_chars, temperature=TEMPERATURE):
