@@ -12,13 +12,15 @@ import re
 import string
 from dotenv import load_dotenv
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
 
 # Load environment variables
 load_dotenv()
 
 # Load hyperparameters from .env
-OUTPUT_DIR = os.getenv("OUTPUT_DIR", f"{dir_path}\\outputs")
+OUTPUT_DIR = os.getenv("OUTPUT_DIR", ".\\outputs")
 
 # -----------------------------
 # Load Saved Model & Vectorizer
@@ -39,7 +41,7 @@ def preprocess_text(text):
 # -----------------------------
 # Prediction Function
 # -----------------------------
-def predict_emotion(text):
+def predict(text):
     text_clean = preprocess_text(text)
     text_vectorized = vectorizer.transform([text_clean])
     predicted_label = clf.predict(text_vectorized)[0]  # Get single prediction
@@ -50,4 +52,4 @@ def predict_emotion(text):
 # -----------------------------
 sample_texts = input("Your text: ")
 
-print(f"Text: {text} --> Predicted Emotion: {predict_emotion(sample_texts)}")
+print(f"Text: {sample_texts} --> Predicted: {predict(sample_texts)}")
