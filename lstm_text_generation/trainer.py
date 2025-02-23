@@ -20,7 +20,7 @@ os.chdir(dname)
 
 load_dotenv()
 
-INPUT_DIR = f"{dir_path}\\{os.getenv('INPUT_DIR')}"
+INPUT_DIR = {os.getenv('INPUT_DIR')
 SEQ_LENGHT = int(os.getenv('SEQ_LENGTH'))
 EPOCHS = int(os.getenv('EPOCHS'))
 BATCH_SIZE = int(os.getenv('BATCH_SIZE'))
