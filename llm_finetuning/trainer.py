@@ -13,14 +13,18 @@ from dotenv import load_dotenv
 import os
 import logging
 
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
+
 logging.basicConfig(level=logging.INFO)
 load_dotenv()
 
 model_name = os.getenv("MODEL_NAME", "gpt2")
 dataset_name = os.getenv("DATASET_NAME", "wikitext")
 dataset_config = os.getenv("DATASET_CONFIG", "wikitext-2-raw-v1")
-output_dir = os.getenv("OUTPUT_DIR", "./outputs")
-logging_dir = os.getenv("LOGGING_DIR", "./logs")
+output_dir = os.getenv("OUTPUT_DIR", ".\\outputs")
+logging_dir = os.getenv("LOGGING_DIR", ".\\logs")
 batch_size = int(os.getenv("BATCH_SIZE", 8))
 epochs = int(os.getenv("EPOCHS", 3))
 save_steps = int(os.getenv("SAVE_STEPS", 10000))
