@@ -33,8 +33,8 @@ nltk.download("stopwords")
 nltk.download("wordnet")
 
 # Load hyperparameters from .env
-TRAIN_X_PATH = os.getenv("TRAIN_X_PATH", ".\\datasets\\train_X.pkl")
-TRAIN_Y_PATH = os.getenv("TRAIN_Y_PATH", ".\\datasets\\train_y.pkl")
+TRAIN_X_PATH = ".\\datasets\\" + os.getenv("TRAIN_X_PATH")
+TRAIN_Y_PATH = ".\\datasets\\" + os.getenv("TRAIN_Y_PATH")
 OUTPUT_DIR = os.getenv("OUTPUT_DIR", ".\\outputs")
 MAX_FEATURES = int(os.getenv("MAX_FEATURES", 7000))
 NGRAM_RANGE = tuple(map(int, os.getenv("NGRAM_RANGE", "1,3").split(',')))
